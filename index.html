@@ -1,0 +1,2142 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TECNOVA - Tienda de Tecnología</title>
+  <meta name="description" content="TECNOVA - Los mejores productos de tecnología al mejor precio">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* ================================================
+       TECNOVA - Design System
+       ================================================ */
+
+    :root {
+      --primary: #f59e0b;
+      --primary-light: #fbbf24;
+      --primary-dark: #d97706;
+      --secondary: #ea580c;
+      --accent: #f97316;
+
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #141414;
+      --bg-tertiary: #1f1f1f;
+      --bg-card: #1a1a1a;
+      --bg-hover: #252525;
+
+      --text-primary: #ffffff;
+      --text-secondary: #a3a3a3;
+      --text-muted: #737373;
+      --text-dark: #171717;
+
+      --success: #22c55e;
+      --success-bg: rgba(34, 197, 94, 0.1);
+      --warning: #eab308;
+      --error: #ef4444;
+      --error-bg: rgba(239, 68, 68, 0.1);
+
+      --gradient-primary: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+      --shadow-glow: 0 0 20px rgba(245, 158, 11, 0.3);
+
+      --border-color: #2a2a2a;
+      --border-light: #3a3a3a;
+
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --radius-xl: 1rem;
+      --radius-full: 9999px;
+
+      --transition-fast: 150ms ease;
+      --transition-base: 200ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      min-height: 100vh;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: var(--radius-lg);
+      transition: all var(--transition-base);
+    }
+
+    .btn-primary {
+      background: var(--gradient-primary);
+      color: var(--text-dark);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .btn-secondary {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-hover);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: var(--text-dark);
+    }
+
+    .btn-lg {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+    }
+
+    /* Text Gradient */
+    .text-gradient {
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ========== HEADER ========== */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .header-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      border-radius: var(--radius-md);
+      transition: all var(--transition-fast);
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+      background: var(--bg-tertiary);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .icon-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      color: var(--text-secondary);
+      border-radius: var(--radius-full);
+      transition: all var(--transition-fast);
+    }
+
+    .icon-btn:hover {
+      color: var(--text-primary);
+      background: var(--bg-tertiary);
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 5px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-dark);
+      background: var(--gradient-primary);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      min-height: 400px;
+    }
+
+    .hero-carousel {
+      position: relative;
+      width: 100%;
+      height: 350px;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .carousel-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .carousel-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+      object-fit: cover;
+    }
+
+    .carousel-slide.active {
+      opacity: 1;
+    }
+
+    .carousel-dots {
+      position: absolute;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.5rem;
+      z-index: 10;
+    }
+
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+    }
+
+    .carousel-dot.active {
+      background: #fff;
+      width: 20px;
+      border-radius: 10px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 0.25rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--primary);
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: var(--radius-full);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-description {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      max-width: 500px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+
+
+    /* ========== FEATURES ========== */
+    .features {
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .feature-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      background: var(--gradient-primary);
+      color: var(--text-dark);
+      border-radius: var(--radius-lg);
+    }
+
+    .feature-text h4 {
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .feature-text p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* ========== SECTIONS ========== */
+    .section {
+      padding: 4rem 0;
+    }
+
+    .section-dark {
+      background: var(--bg-secondary);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .section-link {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--primary);
+    }
+
+    /* ========== CATEGORIES ========== */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .category-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      padding: 1.5rem;
+      background: linear-gradient(145deg, #1f1f1f 0%, #141414 100%);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      transition: all var(--transition-base);
+      cursor: pointer;
+    }
+
+    .category-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .category-name {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .category-count {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    /* ========== PRODUCTS GRID ========== */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      transition: all var(--transition-base);
+      cursor: pointer;
+    }
+
+    .product-card:hover {
+      border-color: var(--border-light);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .product-image {
+      position: relative;
+      aspect-ratio: 1;
+      background: var(--bg-tertiary);
+      overflow: hidden;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-base);
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.05);
+    }
+
+    .product-badges {
+      position: absolute;
+      top: 0.5rem;
+      left: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .badge {
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+    }
+
+    .badge-discount {
+      background: var(--error);
+      color: white;
+    }
+
+    .badge-new {
+      background: var(--gradient-primary);
+      color: var(--text-dark);
+    }
+
+    .product-actions {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all var(--transition-base);
+    }
+
+    .product-card:hover .product-actions {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .product-action-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-full);
+      transition: all var(--transition-fast);
+    }
+
+    .product-action-btn:hover {
+      background: var(--gradient-primary);
+      color: var(--text-dark);
+      border-color: transparent;
+    }
+
+    .product-info {
+      padding: 1rem;
+    }
+
+    .product-brand {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+
+    .product-name {
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .product-pricing {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+
+    .product-price {
+      font-size: 1.125rem;
+      font-weight: 700;
+    }
+
+    .product-compare-price {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+
+    /* ========== PROMO BANNER ========== */
+    .promo-banner {
+      padding: 4rem 0;
+      background: var(--gradient-primary);
+      text-align: center;
+    }
+
+    .promo-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .promo-tag {
+      display: inline-block;
+      padding: 0.25rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: var(--radius-full);
+      margin-bottom: 1rem;
+    }
+
+    .promo-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+    }
+
+    .promo-description {
+      font-size: 1.125rem;
+      color: var(--text-dark);
+      opacity: 0.9;
+      margin-bottom: 2rem;
+    }
+
+    .promo-banner .btn-primary {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand .logo {
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .footer-description {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .footer-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      color: var(--text-secondary);
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-full);
+      transition: all var(--transition-fast);
+    }
+
+    .footer-social a:hover {
+      color: var(--text-dark);
+      background: var(--gradient-primary);
+    }
+
+    .footer-section h4 {
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-section ul {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .footer-section a {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      transition: color var(--transition-fast);
+    }
+
+    .footer-section a:hover {
+      color: var(--primary);
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-color);
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    /* ========== WHATSAPP BUTTON ========== */
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #25D366;
+      color: white;
+      border-radius: var(--radius-full);
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+      z-index: 50;
+      transition: all var(--transition-base);
+    }
+
+    .whatsapp-btn:hover {
+      transform: scale(1.1);
+    }
+
+    /* ========== CART DRAWER ========== */
+    .cart-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+    }
+
+    .cart-overlay.open {
+      display: block;
+    }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: -420px;
+      bottom: 0;
+      width: 100%;
+      max-width: 420px;
+      background: var(--bg-secondary);
+      z-index: 201;
+      display: flex;
+      flex-direction: column;
+      transition: right var(--transition-base);
+    }
+
+    .cart-drawer.open {
+      right: 0;
+    }
+
+    .cart-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .cart-header h2 {
+      font-size: 1.125rem;
+      font-weight: 600;
+    }
+
+    .cart-close {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      border-radius: var(--radius-full);
+    }
+
+    .cart-close:hover {
+      color: var(--text-primary);
+      background: var(--bg-tertiary);
+    }
+
+    .cart-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+    }
+
+    .cart-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    .cart-empty i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem;
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-lg);
+      margin-bottom: 0.5rem;
+    }
+
+    .cart-item-image {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-name {
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    .cart-item-price {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .cart-item-qty {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .qty-btn {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      border-radius: var(--radius-sm);
+    }
+
+    .qty-btn:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+    }
+
+    .cart-footer {
+      padding: 1.5rem;
+      border-top: 1px solid var(--border-color);
+      background: var(--bg-primary);
+    }
+
+    .cart-subtotal {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .cart-subtotal-label {
+      color: var(--text-secondary);
+    }
+
+    .cart-subtotal-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .cart-checkout-btn {
+      width: 100%;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 1024px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 3rem 1.5rem;
+        min-height: auto;
+      }
+
+      .hero-description {
+        margin: 0 auto 2rem;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-image {
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav {
+        display: none;
+      }
+
+      .features-grid,
+      .categories-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+
+      .promo-title {
+        font-size: 1.75rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-title {
+        font-size: 2rem;
+      }
+    }
+
+    /* ========== DROPDOWN MENU ========== */
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .nav-dropdown-trigger {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .dropdown-arrow {
+      transition: transform var(--transition-fast);
+    }
+
+    .nav-dropdown.open .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    .nav-dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 220px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all var(--transition-base);
+      box-shadow: var(--shadow-lg);
+      z-index: 150;
+    }
+
+    .nav-dropdown.open .nav-dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      border-radius: var(--radius-md);
+      transition: all var(--transition-fast);
+    }
+
+    .dropdown-item:hover {
+      color: var(--text-primary);
+      background: var(--bg-tertiary);
+    }
+
+    .dropdown-item i {
+      width: 18px;
+      height: 18px;
+    }
+
+    .dropdown-divider {
+      height: 1px;
+      background: var(--border-color);
+      margin: 0.5rem 0;
+    }
+
+    .dropdown-item-all {
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    /* ========== MOBILE MENU ========== */
+    .mobile-menu-btn {
+      display: none;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg-primary);
+      z-index: 300;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .mobile-menu-header button {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+    }
+
+    .mobile-nav {
+      flex: 1;
+      padding: 1.5rem;
+    }
+
+    .mobile-nav-section {
+      margin-bottom: 2rem;
+    }
+
+    .mobile-nav-section h4 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 1rem;
+    }
+
+    .mobile-nav-section a {
+      display: block;
+      padding: 0.75rem 0;
+      font-size: 1rem;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .mobile-nav-section a:hover {
+      color: var(--primary);
+    }
+
+    .desktop-only {
+      display: flex;
+    }
+
+    @media (max-width: 768px) {
+      .mobile-menu-btn {
+        display: flex;
+      }
+
+      .desktop-only {
+        display: none;
+      }
+    }
+
+    /* User Menu */
+    .user-menu-container {
+      position: relative;
+    }
+
+    .user-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 200px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1rem;
+      box-shadow: var(--shadow-lg);
+      display: none;
+      z-index: 200;
+      margin-top: 0.5rem;
+    }
+
+    .user-dropdown.open {
+      display: block;
+    }
+
+    .user-info {
+      margin-bottom: 1rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+
+    .user-info p {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .user-info small {
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+    }
+
+    /* Login Modal */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(4px);
+      z-index: 500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .login-modal {
+      background: var(--bg-card);
+      padding: 2rem;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-color);
+      width: 90%;
+      max-width: 380px;
+      box-shadow: var(--shadow-glow);
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-backdrop.open .login-modal {
+      transform: translateY(0);
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 0.75rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+    }
+
+    .btn-full {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <a href="#" class="logo">TECNOVA</a>
+
+      <nav class="nav" id="mainNav">
+        <!-- Categories Dropdown -->
+        <div class="nav-dropdown">
+          <button class="nav-link nav-dropdown-trigger" onclick="toggleDropdown()">
+            <i data-lucide="grid-3x3"></i>
+            Categorías
+            <i data-lucide="chevron-down" class="dropdown-arrow"></i>
+          </button>
+          <div class="nav-dropdown-menu" id="categoriesDropdown">
+            <a href="#" class="dropdown-item" onclick="filterCategory('celulares')">
+              <i data-lucide="smartphone"></i> Celulares
+            </a>
+            <a href="#" class="dropdown-item" onclick="filterCategory('computadoras')">
+              <i data-lucide="laptop"></i> Computadoras
+            </a>
+            <a href="#" class="dropdown-item" onclick="filterCategory('audio')">
+              <i data-lucide="headphones"></i> Audio
+            </a>
+            <a href="#" class="dropdown-item" onclick="filterCategory('tablets')">
+              <i data-lucide="tablet"></i> Tablets
+            </a>
+            <a href="#" class="dropdown-item" onclick="filterCategory('gaming')">
+              <i data-lucide="gamepad-2"></i> Gaming
+            </a>
+            <a href="#" class="dropdown-item" onclick="filterCategory('wearables')">
+              <i data-lucide="watch"></i> Wearables
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="#categorias" class="dropdown-item dropdown-item-all">
+              Ver todas las categorías
+            </a>
+          </div>
+        </div>
+        <a href="#ofertas" class="nav-link">Ofertas</a>
+        <a href="#productos" class="nav-link">Productos</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="user-menu-container">
+          <button class="icon-btn" onclick="toggleUserMenu()" id="userBtn">
+            <i data-lucide="user"></i>
+          </button>
+          <div class="user-dropdown" id="userDropdown">
+            <div class="user-info" id="userInfo" style="display:none">
+              <p id="userName">Invitado</p>
+              <small id="userRole">Cliente</small>
+            </div>
+            <button class="btn btn-primary btn-sm btn-full" onclick="openLoginModal()" id="loginBtn">Iniciar
+              Sesión</button>
+            <button class="btn btn-secondary btn-sm btn-full" onclick="logout()" id="logoutBtn"
+              style="display:none">Cerrar Sesión</button>
+          </div>
+        </div>
+        <button class="icon-btn" onclick="openCart()">
+          <i data-lucide="shopping-cart"></i>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+        <a href="admin.html" class="icon-btn desktop-only">
+          <i data-lucide="user"></i>
+        </a>
+        <button class="icon-btn mobile-menu-btn" onclick="toggleMobileMenu()">
+          <i data-lucide="menu" id="menuIcon"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-menu-header">
+        <span class="logo">TECNOVA</span>
+        <button onclick="toggleMobileMenu()"><i data-lucide="x"></i></button>
+      </div>
+      <nav class="mobile-nav">
+        <div class="mobile-nav-section">
+          <h4>Categorías</h4>
+          <a href="#" onclick="filterCategory('celulares'); toggleMobileMenu()">Celulares</a>
+          <a href="#" onclick="filterCategory('computadoras'); toggleMobileMenu()">Computadoras</a>
+          <a href="#" onclick="filterCategory('audio'); toggleMobileMenu()">Audio</a>
+          <a href="#" onclick="filterCategory('tablets'); toggleMobileMenu()">Tablets</a>
+          <a href="#" onclick="filterCategory('gaming'); toggleMobileMenu()">Gaming</a>
+          <a href="#" onclick="filterCategory('wearables'); toggleMobileMenu()">Wearables</a>
+        </div>
+        <div class="mobile-nav-section">
+          <h4>Tienda</h4>
+          <a href="#productos" onclick="toggleMobileMenu()">Todos los productos</a>
+          <a href="#ofertas" onclick="toggleMobileMenu()">Ofertas</a>
+        </div>
+        <div class="mobile-nav-section">
+          <a href="admin.html" class="btn btn-outline" style="width:100%">Panel Admin</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-badge" id="heroBadge">Nueva Colección 2024</span>
+      <h1 class="hero-title" id="heroTitle">
+        Tecnología que
+        <span class="text-gradient"> impulsa tu vida</span>
+      </h1>
+      <p class="hero-description" id="heroSubtitle">
+        Descubrí los mejores productos de tecnología con garantía oficial y envío a todo el país.
+      </p>
+      <div class="hero-actions">
+        <a href="#productos" class="btn btn-primary btn-lg">
+          Ver productos
+          <i data-lucide="arrow-right"></i>
+        </a>
+        <a href="#ofertas" class="btn btn-outline btn-lg">
+          Ver ofertas
+        </a>
+      </div>
+    </div>
+    <div class="hero-carousel" id="heroCarousel">
+      <div class="carousel-inner" id="heroSlides">
+        <img src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?w=800" class="carousel-slide active"
+          alt="Slide 1">
+      </div>
+      <div class="carousel-dots" id="heroDots">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="container">
+      <div class="features-grid" id="featuresGrid">
+        <!-- Will be filled by applySettings if custom data exists -->
+        <div class="feature-item">
+          <div class="feature-icon"><i data-lucide="truck"></i></div>
+          <div class="feature-text">
+            <h4>Envío Gratis</h4>
+            <p>En compras mayores a $100.000</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><i data-lucide="shield"></i></div>
+          <div class="feature-text">
+            <h4>Garantía Oficial</h4>
+            <p>Todos los productos con garantía</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><i data-lucide="credit-card"></i></div>
+          <div class="feature-text">
+            <h4>Cuotas sin interés</h4>
+            <p>Hasta 12 cuotas con Mercado Pago</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><i data-lucide="headphones"></i></div>
+          <div class="feature-text">
+            <h4>Soporte 24/7</h4>
+            <p>Atención por WhatsApp</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="section" id="categorias">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Categorías</h2>
+        <a href="#" class="section-link">
+          Ver todas <i data-lucide="arrow-right"></i>
+        </a>
+      </div>
+      <div class="categories-grid" id="categoriesGrid">
+        <!-- Categories loaded by JS -->
+      </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal-backdrop" id="loginModal">
+      <div class="login-modal">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+          <h2 style="margin:0;">Iniciar Sesión</h2>
+          <button onclick="closeLoginModal()" style="color:var(--text-secondary);"><i data-lucide="x"></i></button>
+        </div>
+        <form onsubmit="login(event)">
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-input" id="loginEmail" placeholder="tu@email.com" required
+              value="cliente@tecnova.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Contraseña</label>
+            <input type="password" class="form-input" id="loginPassword" placeholder="******" required value="1234">
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Ingresar</button>
+          <div style="margin-top:1rem; text-align:center; font-size:0.875rem; color:var(--text-secondary);">
+            <p>Cuentas de prueba:</p>
+            <small>cliente@tecnova.com / 1234</small><br>
+            <small>mayorista@tecnova.com / 1234</small>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div id="productos"></div>
+  <div id="ofertas"></div>
+  <!-- Home Builder Container -->
+  <div id="homeBuilderContainer"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="logo">TECNOVA</span>
+          <p class="footer-description">
+            Los mejores productos de tecnología al mejor precio. Envío a todo el país con garantía oficial.
+          </p>
+          <div class="footer-social">
+            <a href="#"><i data-lucide="instagram"></i></a>
+            <a href="#"><i data-lucide="facebook"></i></a>
+            <a href="#"><i data-lucide="twitter"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h4>Categorías</h4>
+          <ul>
+            <li><a href="#">Celulares</a></li>
+            <li><a href="#">Computadoras</a></li>
+            <li><a href="#">Audio</a></li>
+            <li><a href="#">Tablets</a></li>
+            <li><a href="#">Gaming</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Información</h4>
+          <ul>
+            <li><a href="#">Sobre Nosotros</a></li>
+            <li><a href="#">Envíos</a></li>
+            <li><a href="#">Formas de Pago</a></li>
+            <li><a href="#">Cambios</a></li>
+            <li><a href="#">Preguntas Frecuentes</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="#">WhatsApp</a></li>
+            <li><a href="#">info@tecnova.com</a></li>
+            <li>Buenos Aires, Argentina</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2024 TECNOVA. Todos los derechos reservados.</p>
+        <p>Medios de pago: Mercado Pago • Visa • Mastercard</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/5491122334455?text=Hola!%20Quiero%20hacer%20una%20consulta" target="_blank"
+    class="whatsapp-btn">
+    <i data-lucide="message-circle"></i>
+  </a>
+
+  <!-- Cart Drawer -->
+  <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h2>Carrito</h2>
+      <button class="cart-close" onclick="closeCart()">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+    <div class="cart-body" id="cartBody">
+      <div class="cart-empty">
+        <i data-lucide="shopping-bag"></i>
+        <p>Tu carrito está vacío</p>
+      </div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-subtotal">
+        <span class="cart-subtotal-label">Subtotal</span>
+        <span class="cart-subtotal-value" id="cartSubtotal">$0</span>
+      </div>
+      <button class="btn btn-primary btn-lg cart-checkout-btn" onclick="checkout()">
+        Finalizar compra
+        <i data-lucide="arrow-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Sample Data
+    // Sample Data (Shared with Admin via LocalStorage if available)
+    let products = JSON.parse(localStorage.getItem('tecnova_products')) || [
+      {
+        id: '1',
+        name: 'iPhone 15 Pro Max',
+        brand: 'Apple',
+        price: 1899999,
+        comparePrice: 2199999,
+        image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=800',
+        discount: 14,
+        isNew: true,
+        featured: true
+      },
+      {
+        id: '2',
+        name: 'MacBook Pro 14"',
+        brand: 'Apple',
+        price: 2499999,
+        comparePrice: null,
+        image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800',
+        discount: 0,
+        isNew: false,
+        featured: true
+      },
+      {
+        id: '3',
+        name: 'Samsung Galaxy S24 Ultra',
+        brand: 'Samsung',
+        price: 1599999,
+        comparePrice: 1799999,
+        image: 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=800',
+        discount: 11,
+        isNew: true,
+        featured: true
+      },
+      {
+        id: '4',
+        name: 'AirPods Pro 2',
+        brand: 'Apple',
+        price: 349999,
+        comparePrice: 399999,
+        image: 'https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?w=800',
+        discount: 12,
+        isNew: false,
+        featured: true
+      },
+      {
+        id: '5',
+        name: 'Sony WH-1000XM5',
+        brand: 'Sony',
+        price: 499999,
+        comparePrice: null,
+        image: 'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=800',
+        discount: 0,
+        isNew: false,
+        featured: false
+      },
+      {
+        id: '6',
+        name: 'iPad Pro 12.9"',
+        brand: 'Apple',
+        price: 1799999,
+        comparePrice: null,
+        image: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=800',
+        discount: 0,
+        isNew: false,
+        featured: true
+      },
+      {
+        id: '7',
+        name: 'PlayStation 5',
+        brand: 'Sony',
+        price: 899999,
+        comparePrice: 999999,
+        image: 'https://images.unsplash.com/photo-1606813907291-d86efa9b94db?w=800',
+        discount: 10,
+        isNew: false,
+        featured: false
+      },
+      {
+        id: '8',
+        name: 'Apple Watch Ultra 2',
+        brand: 'Apple',
+        price: 1299999,
+        comparePrice: null,
+        image: 'https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?w=800',
+        discount: 0,
+        isNew: true,
+        featured: true
+      }
+    ];
+
+    const categories = [
+      { name: 'Celulares', count: 45 },
+      { name: 'Computadoras', count: 32 },
+      { name: 'Audio', count: 28 },
+      { name: 'Tablets', count: 15 },
+      { name: 'Gaming', count: 38 },
+      { name: 'Wearables', count: 22 }
+    ];
+
+    // Cart state
+    let cart = JSON.parse(localStorage.getItem('tecnova_cart')) || [];
+
+    // Auth State
+    let currentUser = JSON.parse(localStorage.getItem('tecnova_user')) || null;
+
+    function toggleUserMenu() {
+      document.getElementById('userDropdown').classList.toggle('open');
+    }
+
+    function openLoginModal() {
+      document.getElementById('loginModal').classList.add('open');
+      document.getElementById('userDropdown').classList.remove('open');
+    }
+
+    function closeLoginModal() {
+      document.getElementById('loginModal').classList.remove('open');
+    }
+
+    function login(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const pass = document.getElementById('loginPassword').value;
+
+      // Admin redirect
+      if (email === 'admin@tecnova.com' && pass === 'admin') {
+        window.location.href = 'admin.html';
+        return;
+      }
+
+      // Check persistent users
+      const users = JSON.parse(localStorage.getItem('tecnova_users')) || [];
+      const foundUser = users.find(u => u.email === email && u.password === pass);
+
+      if (foundUser) {
+        currentUser = foundUser;
+      } else {
+        // Fallback Mock
+        if (email === 'mayorista@tecnova.com') {
+          currentUser = { name: 'Mayorista Demo', email, role: 'wholesale' };
+        } else {
+          currentUser = { name: 'Cliente Demo', email, role: 'customer' };
+        }
+      }
+
+      localStorage.setItem('tecnova_user', JSON.stringify(currentUser));
+      updateAuthUI();
+      closeLoginModal();
+    }
+
+    function logout() {
+      currentUser = null;
+      localStorage.removeItem('tecnova_user');
+      updateAuthUI();
+      toggleUserMenu();
+    }
+
+    function updateAuthUI() {
+      if (currentUser) {
+        document.getElementById('userName').textContent = currentUser.name;
+        document.getElementById('userRole').textContent = currentUser.role === 'wholesale' ? 'Mayorista' : 'Cliente';
+        document.getElementById('userInfo').style.display = 'block';
+        document.getElementById('loginBtn').style.display = 'none';
+        document.getElementById('logoutBtn').style.display = 'block';
+      } else {
+        document.getElementById('userInfo').style.display = 'none';
+        document.getElementById('loginBtn').style.display = 'block';
+        document.getElementById('logoutBtn').style.display = 'none';
+      }
+      renderProducts(); // Re-render to update prices
+    }
+
+    // Format price
+    function formatPrice(price) {
+      return '$' + (price / 100).toLocaleString('es-AR', { minimumFractionDigits: 0 });
+    }
+
+    // Render categories
+    function renderCategories() {
+      const grid = document.getElementById('categoriesGrid');
+      grid.innerHTML = categories.map(cat => `
+        <div class="category-card">
+          <span class="category-name">${cat.name}</span>
+          <span class="category-count">${cat.count} productos</span>
+        </div>
+      `).join('');
+    }
+
+    // Helper: Render Product Card
+    function renderProductCard(product) {
+      const isWholesale = currentUser && currentUser.role === 'wholesale' && product.wholesalePrice;
+      const finalPrice = isWholesale ? product.wholesalePrice : product.price;
+
+      return `
+        <div class="product-card" onclick="addToCart('${product.id}')">
+          <div class="product-image">
+            <img src="${product.image}" alt="${product.name}" loading="lazy">
+            <div class="product-badges">
+              ${product.discount > 0 ? `<span class="badge badge-discount">-${product.discount}%</span>` : ''}
+              ${product.isNew ? `<span class="badge badge-new">Nuevo</span>` : ''}
+              ${isWholesale ? `<span class="badge" style="background:var(--primary); color:white;">Mayorista</span>` : ''}
+            </div>
+            <div class="product-actions">
+              <button class="product-action-btn" onclick="event.stopPropagation(); addToCart('${product.id}')">
+                <i data-lucide="shopping-cart"></i>
+              </button>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-brand">${product.brand}</span>
+            <h3 class="product-name">${product.name}</h3>
+            <div class="product-pricing">
+              <span class="product-price">${formatPrice(finalPrice)}</span>
+              ${product.comparePrice && !isWholesale ? `<span class="product-compare-price">${formatPrice(product.comparePrice)}</span>` : ''}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Render products
+    function renderProducts() {
+      const grid = document.getElementById('productsGrid');
+      const featured = products.filter(p => p.featured).slice(0, 8);
+
+      grid.innerHTML = featured.map(renderProductCard).join('');
+
+      lucide.createIcons();
+    }
+
+    // Cart functions
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        existing.qty++;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+          qty: 1
+        });
+      }
+
+      saveCart();
+      updateCartUI();
+      openCart();
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      saveCart();
+      updateCartUI();
+    }
+
+    function updateQty(productId, delta) {
+      const item = cart.find(i => i.id === productId);
+      if (item) {
+        item.qty += delta;
+        if (item.qty <= 0) {
+          removeFromCart(productId);
+          return;
+        }
+      }
+      saveCart();
+      updateCartUI();
+    }
+
+    function saveCart() {
+      localStorage.setItem('tecnova_cart', JSON.stringify(cart));
+    }
+
+    function updateCartUI() {
+      const badge = document.getElementById('cartBadge');
+      const body = document.getElementById('cartBody');
+      const subtotal = document.getElementById('cartSubtotal');
+
+      const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+      const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+      badge.textContent = totalItems;
+      subtotal.textContent = formatPrice(totalPrice);
+
+      if (cart.length === 0) {
+        body.innerHTML = `
+          <div class="cart-empty">
+            <i data-lucide="shopping-bag"></i>
+            <p>Tu carrito está vacío</p>
+          </div>
+        `;
+      } else {
+        body.innerHTML = cart.map(item => `
+          <div class="cart-item">
+            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+            <div class="cart-item-info">
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-price">${formatPrice(item.price)}</div>
+              <div class="cart-item-qty">
+                <button class="qty-btn" onclick="updateQty('${item.id}', -1)">-</button>
+                <span>${item.qty}</span>
+                <button class="qty-btn" onclick="updateQty('${item.id}', 1)">+</button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      lucide.createIcons();
+    }
+
+    function openCart() {
+      document.getElementById('cartOverlay').classList.add('open');
+      document.getElementById('cartDrawer').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCart() {
+      document.getElementById('cartOverlay').classList.remove('open');
+      document.getElementById('cartDrawer').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert('Tu carrito está vacío');
+        return;
+      }
+
+      // Generate WhatsApp message
+      const items = cart.map(item =>
+        `• ${item.name} x${item.qty} - ${formatPrice(item.price * item.qty)}`
+      ).join('\n');
+
+      const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+      const message = `🛒 *Nuevo Pedido - TECNOVA*\n\n${items}\n\n*Total: ${formatPrice(total)}*\n\nQuiero hacer este pedido!`;
+
+      const whatsappUrl = `https://wa.me/5491122334455?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank');
+    }
+
+    let heroInterval;
+    function initHeroCarousel(images) {
+      const slidesCont = document.getElementById('heroSlides');
+      const dotsCont = document.getElementById('heroDots');
+      if (!slidesCont || !dotsCont) return;
+
+      slidesCont.innerHTML = images.map((img, i) => `
+        <img src="${img}" class="carousel-slide ${i === 0 ? 'active' : ''}" alt="Slide ${i + 1}">
+      `).join('');
+
+      dotsCont.innerHTML = images.map((_, i) => `
+        <div class="carousel-dot ${i === 0 ? 'active' : ''}" onclick="setHeroSlide(${i})"></div>
+      `).join('');
+
+      let currentSlide = 0;
+      clearInterval(heroInterval);
+      if (images.length > 1) {
+        heroInterval = setInterval(() => {
+          currentSlide = (currentSlide + 1) % images.length;
+          setHeroSlide(currentSlide);
+        }, 5000);
+      }
+    }
+
+    function setHeroSlide(index) {
+      const slides = document.querySelectorAll('.carousel-slide');
+      const dots = document.querySelectorAll('.carousel-dot');
+      if (!slides.length) return;
+
+      slides.forEach(s => s.classList.remove('active'));
+      dots.forEach(d => d.classList.remove('active'));
+
+      slides[index].classList.add('active');
+      dots[index].classList.add('active');
+    }
+
+    function applySettings() {
+      const config = JSON.parse(localStorage.getItem('tecnova_config'));
+      if (!config) return;
+
+      if (config.color) {
+        document.documentElement.style.setProperty('--primary', config.color);
+      }
+
+      if (config.name) {
+        document.title = `${config.name} | Tienda Oficial`;
+        document.querySelectorAll('.logo').forEach(l => l.textContent = config.name);
+      }
+
+      // Hero
+      if (config.heroImages && config.heroImages.length > 0) {
+        initHeroCarousel(config.heroImages);
+      } else if (config.heroImage) {
+        initHeroCarousel([config.heroImage]);
+      }
+
+      if (config.heroBadge) {
+        const hBadge = document.getElementById('heroBadge');
+        if (hBadge) hBadge.textContent = config.heroBadge;
+      }
+      if (config.heroTitle) {
+        const hTitle = document.getElementById('heroTitle');
+        if (hTitle) hTitle.textContent = config.heroTitle;
+      }
+      if (config.heroSubtitle) {
+        const hSub = document.getElementById('heroSubtitle');
+        if (hSub) hSub.textContent = config.heroSubtitle;
+      }
+
+      // Features
+      if (config.features && config.features.length === 4) {
+        const grid = document.getElementById('featuresGrid');
+        if (grid) {
+          const icons = ['truck', 'shield', 'credit-card', 'headphones'];
+          grid.innerHTML = config.features.map((f, i) => `
+              <div class="feature-item">
+                <div class="feature-icon"><i data-lucide="${icons[i]}"></i></div>
+                <div class="feature-text">
+                  <h4>${f.title}</h4>
+                  <p>${f.sub}</p>
+                </div>
+              </div>
+          `).join('');
+        }
+      }
+
+      lucide.createIcons();
+    }
+
+    // Initialize
+    applySettings();
+    renderCategories(); // Static Categories
+
+    // Determine Layout source
+    if (localStorage.getItem('tecnova_home_layout')) {
+      renderHomeBuilder(); // Dynamic
+    } else {
+      // Fallback for first load if no layout saves (or just use builder with default?)
+      // Admin JS saves default if empty on init.
+      // Frontend should probably support a default if nothing exists.
+      renderDefaultHome();
+    }
+
+    updateAuthUI();
+    updateCartUI();
+
+    // Dropdown menu
+    function toggleDropdown() {
+      const dropdown = document.querySelector('.nav-dropdown');
+      dropdown.classList.toggle('open');
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function (e) {
+      const dropdown = document.querySelector('.nav-dropdown');
+      if (dropdown && !dropdown.contains(e.target)) {
+        dropdown.classList.remove('open');
+      }
+    });
+
+    // Mobile menu
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('open');
+      document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+      lucide.createIcons();
+    }
+
+    // Filter by category
+    let currentFilter = null;
+
+    function filterCategory(category) {
+      currentFilter = category;
+      const dropdown = document.querySelector('.nav-dropdown');
+      if (dropdown) dropdown.classList.remove('open');
+
+      const grid = document.getElementById('productsGrid');
+      const filtered = category
+        ? products.filter(p => p.category === category)
+        : products.filter(p => p.featured);
+
+      grid.innerHTML = filtered.map(renderProductCard).join('');
+
+      // Update section title
+      const sectionTitle = document.querySelector('#productos .section-title');
+      if (sectionTitle) {
+        sectionTitle.textContent = category
+          ? category.charAt(0).toUpperCase() + category.slice(1)
+          : 'Productos Destacados';
+      }
+
+      lucide.createIcons();
+
+      // Scroll to products
+      document.getElementById('productos').scrollIntoView({ behavior: 'smooth' });
+    }
+    // --- HOME BUILDER RENDERING ---
+    function renderHomeBuilder() {
+      const container = document.getElementById('homeBuilderContainer');
+      if (!container) return;
+
+      const layout = JSON.parse(localStorage.getItem('tecnova_home_layout')) || [];
+      container.innerHTML = '';
+
+      layout.forEach(section => {
+        if (section.type === 'banner') {
+          container.innerHTML += renderBannerSection(section);
+        } else {
+          container.innerHTML += renderProductSection(section);
+        }
+      });
+      lucide.createIcons();
+    }
+
+    function renderProductSection(section) {
+      const sectionProducts = getProductsForSection(section);
+      if (sectionProducts.length === 0) return '';
+
+      return `
+        <section class="section" style="padding: 4rem 0;">
+          <div class="container">
+            <h2 class="section-title">${section.title}</h2>
+            <div class="products-grid">
+              ${sectionProducts.map(renderProductCard).join('')}
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderBannerSection(section) {
+      return `
+        <div class="container" style="margin-bottom: 2rem;">
+          <div style="width:100%; border-radius:var(--radius-2xl); overflow:hidden; aspect-ratio:21/9;">
+            <img src="${section.bannerUrl}" style="width:100%; height:100%; object-fit:cover;" alt="${section.title}">
+          </div>
+        </div>
+      `;
+    }
+
+    function getProductsForSection(section) {
+      if (section.type === 'products') {
+        const ids = section.productIds || [];
+        return products.filter(p => ids.includes(String(p.id)));
+      }
+      if (section.type === 'smart_products') {
+        if (section.smartType === 'featured') return products.filter(p => p.featured).slice(0, 4);
+        if (section.smartType === 'latest') return [...products].reverse().slice(0, 4);
+        if (section.smartType === 'low_stock') return products.filter(p => p.stock > 0 && p.stock < 5).slice(0, 4);
+      }
+      return [];
+    }
+
+    function renderDefaultHome() {
+      const defaultLayout = [
+        { id: 'def-1', type: 'smart_products', title: 'Productos Destacados', smartType: 'featured' },
+        { id: 'def-2', type: 'smart_products', title: 'Nuevos Ingresos', smartType: 'latest' }
+      ];
+      const container = document.getElementById('homeBuilderContainer');
+      if (!container) return;
+
+      container.innerHTML = defaultLayout.map(renderProductSection).join('');
+      lucide.createIcons();
+    }
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TECNOVA - Sistema Contable</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #f59e0b;
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #141414;
+            --bg-tertiary: #1f1f1f;
+            --text-primary: #ffffff;
+            --text-secondary: #a3a3a3;
+            --text-muted: #737373;
+            --text-dark: #171717;
+            --success: #22c55e;
+            --success-bg: rgba(34, 197, 94, 0.1);
+            --warning: #eab308;
+            --error: #ef4444;
+            --error-bg: rgba(239, 68, 68, 0.1);
+            --info: #3b82f6;
+            --info-bg: rgba(59, 130, 246, 0.1);
+            --gradient-primary: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+            --border-color: #2a2a2a;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border-radius: var(--radius-lg);
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: var(--text-dark);
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--error);
+            color: white;
+        }
+
+        .input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+        }
+
+        .input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .sidebar {
+            width: 260px;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .badge {
+            padding: 2px 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            padding: 1rem;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            border-radius: var(--radius-lg);
+            margin-bottom: 0.25rem;
+            transition: all 0.15s;
+        }
+
+        .nav-item:hover {
+            color: var(--text-primary);
+            background: var(--bg-tertiary);
+        }
+
+        .nav-item.active {
+            color: var(--text-dark);
+            background: var(--gradient-primary);
+        }
+
+        .sidebar-footer {
+            padding: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .main {
+            flex: 1;
+            margin-left: 260px;
+            padding: 2rem;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .page-header p {
+            color: var(--text-muted);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+
+        .stat-value.income {
+            color: var(--success);
+        }
+
+        .stat-value.expense {
+            color: var(--error);
+        }
+
+        .stat-change {
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .stat-change.positive {
+            color: var(--success);
+        }
+
+        .stat-change.negative {
+            color: var(--error);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-header h2 {
+            font-size: 1.125rem;
+        }
+
+        .transactions-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .transaction-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .transaction-item:last-child {
+            border-bottom: none;
+        }
+
+        .transaction-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-lg);
+        }
+
+        .transaction-icon.income {
+            background: var(--success-bg);
+            color: var(--success);
+        }
+
+        .transaction-icon.expense {
+            background: var(--error-bg);
+            color: var(--error);
+        }
+
+        .transaction-info {
+            flex: 1;
+        }
+
+        .transaction-desc {
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .transaction-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .transaction-amount {
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .transaction-amount.income {
+            color: var(--success);
+        }
+
+        .transaction-amount.expense {
+            color: var(--error);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .input-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .input-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .type-toggle {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .type-btn {
+            flex: 1;
+            padding: 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            background: var(--bg-tertiary);
+            transition: all 0.2s;
+        }
+
+        .type-btn.active.income {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .type-btn.active.expense {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .table-container {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            padding: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            background: var(--bg-tertiary);
+            text-align: left;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.875rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tab {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            border-radius: var(--radius-lg);
+        }
+
+        .tab.active {
+            color: var(--primary);
+            background: rgba(245, 158, 11, 0.1);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <span class="logo">TECNOVA</span>
+            <span class="badge">Contable</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active" onclick="showTab('resumen')"><i data-lucide="pie-chart"></i> Resumen</a>
+            <a href="#" class="nav-item" onclick="showTab('movimientos')"><i data-lucide="list"></i> Movimientos</a>
+            <a href="#" class="nav-item" onclick="showTab('reportes')"><i data-lucide="bar-chart-3"></i> Reportes</a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="admin.html" class="nav-item"><i data-lucide="arrow-left"></i> Volver al Admin</a>
+        </div>
+    </aside>
+
+    <main class="main">
+        <!-- Resumen -->
+        <div id="resumen" class="tab-content active">
+            <div class="page-header">
+                <div>
+                    <h1>Resumen Contable</h1>
+                    <p>Balance general de tu negocio</p>
+                </div>
+                <button class="btn btn-primary" onclick="showTab('movimientos')"><i data-lucide="plus"></i> Nuevo
+                    movimiento</button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Ingresos del mes</div>
+                    <div class="stat-value income" id="monthIncome">$0</div>
+                    <div class="stat-change positive">↑ Ventas totales</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Gastos del mes</div>
+                    <div class="stat-value expense" id="monthExpenses">$0</div>
+                    <div class="stat-change negative">↓ Egresos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Ganancia neta</div>
+                    <div class="stat-value" id="monthProfit">$0</div>
+                    <div class="stat-change">Balance del período</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total acumulado</div>
+                    <div class="stat-value" id="totalBalance">$0</div>
+                    <div class="stat-change">Desde el inicio</div>
+                </div>
+            </div>
+
+            <div class="content-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Últimos movimientos</h2>
+                    </div>
+                    <div class="transactions-list" id="recentTransactions"></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Resumen por categoría</h2>
+                    </div>
+                    <div id="categoryBreakdown"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Movimientos -->
+        <div id="movimientos" class="tab-content">
+            <div class="page-header">
+                <div>
+                    <h1>Movimientos</h1>
+                    <p>Registrá ingresos y gastos</p>
+                </div>
+            </div>
+
+            <div class="content-grid">
+                <div>
+                    <div class="card">
+                        <h2 style="margin-bottom: 1rem;">Nuevo movimiento</h2>
+                        <div class="type-toggle">
+                            <button class="type-btn income active" onclick="setType('income')"><i
+                                    data-lucide="trending-up"></i> Ingreso</button>
+                            <button class="type-btn expense" onclick="setType('expense')"><i
+                                    data-lucide="trending-down"></i> Gasto</button>
+                        </div>
+                        <form onsubmit="saveTransaction(event)">
+                            <div class="form-grid">
+                                <div class="input-group full">
+                                    <label class="input-label">Descripción</label>
+                                    <input type="text" class="input" id="txDesc" placeholder="Ej: Venta iPhone 15"
+                                        required>
+                                </div>
+                                <div class="input-group">
+                                    <label class="input-label">Monto ($)</label>
+                                    <input type="number" class="input" id="txAmount" placeholder="0" required>
+                                </div>
+                                <div class="input-group">
+                                    <label class="input-label">Categoría</label>
+                                    <select class="input" id="txCategory">
+                                        <option value="ventas">Ventas</option>
+                                        <option value="servicios">Servicios</option>
+                                        <option value="proveedores">Proveedores</option>
+                                        <option value="sueldos">Sueldos</option>
+                                        <option value="alquiler">Alquiler</option>
+                                        <option value="impuestos">Impuestos</option>
+                                        <option value="marketing">Marketing</option>
+                                        <option value="otros">Otros</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label class="input-label">Fecha</label>
+                                    <input type="date" class="input" id="txDate">
+                                </div>
+                                <div class="input-group">
+                                    <label class="input-label">Método de pago</label>
+                                    <select class="input" id="txPayment">
+                                        <option value="efectivo">Efectivo</option>
+                                        <option value="transferencia">Transferencia</option>
+                                        <option value="mercadopago">Mercado Pago</option>
+                                        <option value="tarjeta">Tarjeta</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="margin-top: 1rem; width: 100%;">Guardar
+                                movimiento</button>
+                        </form>
+                    </div>
+
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Descripción</th>
+                                    <th>Categoría</th>
+                                    <th>Monto</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactionsTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Historial reciente</h2>
+                    </div>
+                    <div class="transactions-list" id="sideTransactions"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reportes -->
+        <div id="reportes" class="tab-content">
+            <div class="page-header">
+                <div>
+                    <h1>Reportes</h1>
+                    <p>Análisis de tu negocio</p>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Total ventas</div>
+                    <div class="stat-value income" id="totalSales">$0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total gastos</div>
+                    <div class="stat-value expense" id="totalExpenses">$0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Ganancia total</div>
+                    <div class="stat-value" id="totalProfit">$0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Movimientos</div>
+                    <div class="stat-value" id="totalMovements">0</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Todos los movimientos</h2>
+                    <button class="btn btn-secondary" onclick="exportData()"><i data-lucide="download"></i>
+                        Exportar</button>
+                </div>
+                <div class="table-container" style="border: none;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Tipo</th>
+                                <th>Descripción</th>
+                                <th>Categoría</th>
+                                <th>Método</th>
+                                <th>Monto</th>
+                            </tr>
+                        </thead>
+                        <tbody id="allTransactionsTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        let transactions = JSON.parse(localStorage.getItem('tecnova_transactions')) || [];
+        let currentType = 'income';
+
+        document.getElementById('txDate').valueAsDate = new Date();
+
+        function formatPrice(n) { return '$' + n.toLocaleString('es-AR'); }
+        function formatDate(d) { return new Date(d).toLocaleDateString('es-AR'); }
+
+        function showTab(id) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            event.target.closest('.nav-item')?.classList.add('active');
+            lucide.createIcons();
+        }
+
+        function setType(type) {
+            currentType = type;
+            document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`.type-btn.${type}`).classList.add('active');
+        }
+
+        function saveTransaction(e) {
+            e.preventDefault();
+            const tx = {
+                id: Date.now().toString(),
+                type: currentType,
+                description: document.getElementById('txDesc').value,
+                amount: parseFloat(document.getElementById('txAmount').value),
+                category: document.getElementById('txCategory').value,
+                date: document.getElementById('txDate').value,
+                payment: document.getElementById('txPayment').value
+            };
+            transactions.unshift(tx);
+            localStorage.setItem('tecnova_transactions', JSON.stringify(transactions));
+            e.target.reset();
+            document.getElementById('txDate').valueAsDate = new Date();
+            renderAll();
+            alert('Movimiento guardado!');
+        }
+
+        function deleteTransaction(id) {
+            if (confirm('¿Eliminar este movimiento?')) {
+                transactions = transactions.filter(t => t.id !== id);
+                localStorage.setItem('tecnova_transactions', JSON.stringify(transactions));
+                renderAll();
+            }
+        }
+
+        function renderAll() {
+            const now = new Date();
+            const thisMonth = transactions.filter(t => new Date(t.date).getMonth() === now.getMonth());
+
+            const monthIncome = thisMonth.filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0);
+            const monthExpenses = thisMonth.filter(t => t.type === 'expense').reduce((s, t) => s + t.amount, 0);
+            const totalIncome = transactions.filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0);
+            const totalExpenses = transactions.filter(t => t.type === 'expense').reduce((s, t) => s + t.amount, 0);
+
+            document.getElementById('monthIncome').textContent = formatPrice(monthIncome);
+            document.getElementById('monthExpenses').textContent = formatPrice(monthExpenses);
+            document.getElementById('monthProfit').textContent = formatPrice(monthIncome - monthExpenses);
+            document.getElementById('totalBalance').textContent = formatPrice(totalIncome - totalExpenses);
+            document.getElementById('totalSales').textContent = formatPrice(totalIncome);
+            document.getElementById('totalExpenses').textContent = formatPrice(totalExpenses);
+            document.getElementById('totalProfit').textContent = formatPrice(totalIncome - totalExpenses);
+            document.getElementById('totalMovements').textContent = transactions.length;
+
+            const txHtml = tx => `
+        <div class="transaction-item">
+          <div class="transaction-icon ${tx.type}"><i data-lucide="${tx.type === 'income' ? 'trending-up' : 'trending-down'}"></i></div>
+          <div class="transaction-info">
+            <div class="transaction-desc">${tx.description}</div>
+            <div class="transaction-date">${formatDate(tx.date)} • ${tx.category}</div>
+          </div>
+          <div class="transaction-amount ${tx.type}">${tx.type === 'income' ? '+' : '-'}${formatPrice(tx.amount)}</div>
+        </div>`;
+
+            document.getElementById('recentTransactions').innerHTML = transactions.slice(0, 8).map(txHtml).join('') || '<p style="padding:1rem;color:var(--text-muted)">Sin movimientos</p>';
+            document.getElementById('sideTransactions').innerHTML = transactions.slice(0, 6).map(txHtml).join('') || '<p style="padding:1rem;color:var(--text-muted)">Sin movimientos</p>';
+
+            document.getElementById('transactionsTable').innerHTML = transactions.slice(0, 20).map(t => `
+        <tr>
+          <td>${formatDate(t.date)}</td>
+          <td>${t.description}</td>
+          <td>${t.category}</td>
+          <td class="transaction-amount ${t.type}">${t.type === 'income' ? '+' : '-'}${formatPrice(t.amount)}</td>
+          <td><button onclick="deleteTransaction('${t.id}')" style="color:var(--error);background:none;border:none;cursor:pointer"><i data-lucide="trash-2"></i></button></td>
+        </tr>`).join('');
+
+            document.getElementById('allTransactionsTable').innerHTML = transactions.map(t => `
+        <tr>
+          <td>${formatDate(t.date)}</td>
+          <td><span style="color:${t.type === 'income' ? 'var(--success)' : 'var(--error)'}">${t.type === 'income' ? 'Ingreso' : 'Gasto'}</span></td>
+          <td>${t.description}</td>
+          <td>${t.category}</td>
+          <td>${t.payment}</td>
+          <td class="transaction-amount ${t.type}">${t.type === 'income' ? '+' : '-'}${formatPrice(t.amount)}</td>
+        </tr>`).join('');
+
+            // Category breakdown
+            const categories = {};
+            transactions.forEach(t => {
+                if (!categories[t.category]) categories[t.category] = { income: 0, expense: 0 };
+                categories[t.category][t.type] += t.amount;
+            });
+            document.getElementById('categoryBreakdown').innerHTML = Object.entries(categories).map(([cat, vals]) => `
+        <div style="display:flex;justify-content:space-between;padding:0.75rem 0;border-bottom:1px solid var(--border-color)">
+          <span style="text-transform:capitalize">${cat}</span>
+          <span style="color:${vals.income > vals.expense ? 'var(--success)' : 'var(--error)'}">${formatPrice(vals.income - vals.expense)}</span>
+        </div>`).join('') || '<p style="color:var(--text-muted)">Sin datos</p>';
+
+            lucide.createIcons();
+        }
+
+        function exportData() {
+            const csv = 'Fecha,Tipo,Descripcion,Categoria,Metodo,Monto\n' +
+                transactions.map(t => `${t.date},${t.type},${t.description},${t.category},${t.payment},${t.amount}`).join('\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'tecnova_contabilidad.csv';
+            a.click();
+        }
+
+        renderAll();
+    </script>
+</body>
+
+</html>
